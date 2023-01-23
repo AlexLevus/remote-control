@@ -1,6 +1,6 @@
+import fs from 'node:fs';
 import http from 'node:http';
 import path from 'node:path';
-import fs from 'node:fs';
 
 const createHTTPServer = () =>
     http.createServer((req, res) => {

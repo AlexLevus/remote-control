@@ -1,23 +1,25 @@
-import fs from 'node:fs';
-import path from 'node:path';
-import http from 'node:http';
+import { config } from 'dotenv';
+import { WebSocketServer } from 'ws';
+import handleWSCommand from "./wsCommandHandler";
+import createHTTPServer from "./createHTTPServer";
 
-const HTTP_PORT = 8022;
+config();
 
-const httpServer = http.createServer(function (req, res) {
-    const __dirname = path.resolve(path.dirname(''));
-    const file_path = __dirname + (req.url === '/' ? '/front/index.html' : '/front' + req.url);
-    fs.readFile(file_path, function (err, data) {
-        if (err) {
-            res.writeHead(404);
-            res.end(JSON.stringify(err));
-            return;
-        }
-        res.writeHead(200);
-        res.end(data);
-    });
-});
+const HTTP_PORT = Number(process.env.PORT) ?? 4000;
 
+const httpServer = createHTTPServer();
+const wss = new WebSocketServer({ server: httpServer });
 
 console.log(`Start static http server on the ${HTTP_PORT} port!`);
 httpServer.listen(HTTP_PORT);
+
+wss.on('connection', (ws) =>  {
+    ws.on('message', async (data) => {
+        console.log('received: %s', data);
+        const result = await handleWSCommand(data)
+
+        if (result) {
+            ws.send(result);
+        }
+    });
+});
