@@ -10,6 +10,8 @@ const handleWSCommand = async (data: WebSocket.RawData) => {
     const firstArg = Number(args[0]);
     const secondArg = Number(args[1]);
 
+    mouse.config.mouseSpeed = 300;
+
     switch (command) {
         case COMMANDS.MOUSE_UP: {
             await mouse.move(up(firstArg));
