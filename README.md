@@ -1,31 +1,43 @@
-# RSSchool NodeJS websocket task template
-> Static http server and base task packages. 
-> By default WebSocket client tries to connect to the 8080 port.
+# REMOTE CONTROL APP
 
-## Installation
-1. Clone/download repo
-2. `npm install`
+## Overview 🔍
+🌐 This application allows remote control via WebSocket connection
 
-## Usage
-**Development**
+## 🏗️ Install & Run🏃
+**Requirements:** Node.js 18.12.1
 
-`npm run start:dev`
+Download or copy repository:
 
-* App served @ `http://localhost:8181` with nodemon
+```bash
+git clone https://github.com/AlexLevus/remote-control
+```
 
-**Production**
+Create .env file with ENV variables (see .env.example):
 
-`npm run start`
+Install dependencies:
+```bash
+npm install
+```
 
-* App served @ `http://localhost:8181` without nodemon
+Run service:
+```bash
+npm run start
+```
 
----
+## Available commands 📚
+- Navigation over the x and y axis
+    - Move mouse up
+    - Move mouse down
+    - Move mouse left
+    - Move mouse right
+    - Send mouse coordinates
+- Drawing
+    - Draw circle with pushed left button:
+    - Draw rectangle with pushed left button:
+    - Draw square with pushed left button:
+- Print screen
+    - Make print screen command and send image (a base64 buffer of the 200 px square around the mouse position)
 
-**All commands**
+## License
 
-Command | Description
---- | ---
-`npm run start:dev` | App served @ `http://localhost:8181` with nodemon
-`npm run start` | App served @ `http://localhost:8181` without nodemon
-
-**Note**: replace `npm` with `yarn` in `package.json` if you use yarn.
+[MIT](https://choosealicense.com/licenses/mit/)
